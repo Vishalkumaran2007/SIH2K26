@@ -92,3 +92,4 @@
 - [x] Synchronize the current validated project files and documentation to the connected GitHub repository.
 - [x] Verify whether a current PhishTank public feed may be used without an API key, then implement it only if the official access terms permit that use.
 - [ ] Synchronize the validated PhishTank public-feed implementation and updated documentation to GitHub.
+- [x] Synchronize the validated PhishTank public-feed implementation and updated documentation to GitHub.
