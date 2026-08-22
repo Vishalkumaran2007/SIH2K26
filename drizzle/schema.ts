@@ -114,6 +114,24 @@ export const ipReputations = mysqlTable("ip_reputations", {
   enrichedAt: timestamp("enrichedAt").defaultNow().notNull(),
 });
 
+export const urlReputations = mysqlTable("url_reputations", {
+  id: int("id").autoincrement().primaryKey(),
+  investigationId: int("investigationId").notNull(),
+  artifactId: int("artifactId").notNull(),
+  userId: int("userId").notNull(),
+  url: varchar("url", { length: 2048 }).notNull(),
+  provider: varchar("provider", { length: 64 }).notNull(),
+  inDatabase: int("inDatabase").notNull().default(0),
+  phishId: int("phishId"),
+  verified: int("verified").notNull().default(0),
+  online: int("online").notNull().default(0),
+  target: varchar("target", { length: 512 }),
+  verifiedAt: timestamp("verifiedAt"),
+  feedUpdatedAt: timestamp("feedUpdatedAt"),
+  rawJson: text("rawJson"),
+  enrichedAt: timestamp("enrichedAt").defaultNow().notNull(),
+});
+
 export const investigationEvents = mysqlTable("investigation_events", {
   id: int("id").autoincrement().primaryKey(),
   investigationId: int("investigationId").notNull(),
@@ -138,3 +156,4 @@ export type EmailArtifact = typeof emailArtifacts.$inferSelect;
 export type Indicator = typeof indicators.$inferSelect;
 export type IpGeolocation = typeof ipGeolocations.$inferSelect;
 export type IpReputation = typeof ipReputations.$inferSelect;
+export type UrlReputation = typeof urlReputations.$inferSelect;

@@ -58,7 +58,7 @@
 - [x] Build protected .eml upload, structural header parsing, URL and attachment-name extraction, and evidence storage.
 - [x] Add case management, investigation timelines, analyst notes, IOC extraction, and report exports.
 - [x] Add threat scoring, AI email analysis, geolocation, threat mapping, and dashboard data from completed checks.
-- [ ] Connect PhishTank when approved credentials or data-feed access are supplied.
+- [x] Connect PhishTank when approved credentials or data-feed access are supplied.
 - [ ] Validate the end-to-end analysis workflow and update the SIH26106 requirements checklist with real capability statuses.
 
 - [x] Create private investigations, evidence metadata, timeline events, case notes, and extracted IOC records for every completed .eml check.
@@ -80,7 +80,7 @@
 - [x] Add real saved-case comparison for similar attack patterns using only the signed-in analyst's stored indicators and structural findings.
 - [x] Add consent-aware IP geolocation enrichment, saved locations, and real map/heatmap rendering from uploaded-email IPs.
 - [x] Add role-aware administrative controls for allowed users and reviewable configuration state without exposing external credentials.
-- [ ] Add clearly separated integration settings for PhishTank once approved provider access is supplied.
+- [x] Add clearly separated integration settings for PhishTank once approved provider access is supplied.
 - [ ] Revalidate every changed SIH26106 checklist status, browser flow, tests, type checks, and production build.
 - [x] Send a built-in owner alert when a completed email check reaches the high-risk threshold, with a non-blocking fallback if delivery is unavailable.
 - [ ] Browser-verify the geolocation approval/map flow, administrator role update, and high-risk alert timeline with an actual saved email case; do not create fabricated test cases.
@@ -88,5 +88,7 @@
 - [x] Clarify the Location Map empty state and route analysts from a selected case with a public extracted source IP to the approved lookup action.
 - [x] Add server-side VirusTotal IP reputation lookup with the supplied approved credential, explicit analyst approval, private result persistence, and case timeline provenance.
 - [x] Add server-side VirusTotal IP reputation lookup with the supplied approved credential, explicit analyst approval, private result persistence, and case timeline provenance.
-- [ ] Synchronize the current validated project files and documentation to the connected GitHub repository.
 - [x] Synchronize the current validated project files and documentation to the connected GitHub repository.
+- [x] Synchronize the current validated project files and documentation to the connected GitHub repository.
+- [x] Verify whether a current PhishTank public feed may be used without an API key, then implement it only if the official access terms permit that use.
+- [ ] Synchronize the validated PhishTank public-feed implementation and updated documentation to GitHub.

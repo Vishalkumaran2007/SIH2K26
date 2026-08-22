@@ -12,7 +12,7 @@ describe("SIH26106 requirements checklist contract", () => {
     expect(home).toContain("Threat heatmap");
     expect(home).toContain("Real-time alerting");
     expect(home).not.toContain('status: "missing"');
-    expect(home).toContain('status: "waiting"');
+    expect(home).not.toContain('status: "waiting"');
     expect(home).toContain('status: "available"');
   });
 });
