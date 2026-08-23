@@ -9,6 +9,9 @@ describe("IP geolocation guard", () => {
     expect(isPublicIpv4("169.254.1.1")).toBe(false);
     expect(isPublicIpv4("172.16.1.1")).toBe(false);
     expect(isPublicIpv4("192.168.1.1")).toBe(false);
+    expect(isPublicIpv4("192.0.2.124")).toBe(false);
+    expect(isPublicIpv4("198.51.100.87")).toBe(false);
+    expect(isPublicIpv4("203.0.113.45")).toBe(false);
     expect(isPublicIpv4("not-an-ip")).toBe(false);
   });
 });

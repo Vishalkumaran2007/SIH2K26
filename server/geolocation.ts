@@ -17,6 +17,7 @@ export function isPublicIpv4(ip: string) {
   if (first === 169 && second === 254) return false;
   if (first === 172 && second >= 16 && second <= 31) return false;
   if (first === 192 && second === 168) return false;
+  if ((first === 192 && second === 0 && parts[2] === 2) || (first === 198 && second === 51 && parts[2] === 100) || (first === 203 && second === 0 && parts[2] === 113)) return false;
   return true;
 }
 

@@ -79,6 +79,18 @@ const navItems: { id: View; label: string; icon: typeof Grid2X2 }[] = [
   { id: "requirements", label: "Requirements", icon: ListFilter },
 ];
 
+function isExternallyEnrichableIpv4(ip: string | null | undefined) {
+  if (!ip) return false;
+  const parts = ip.split(".").map(Number);
+  if (parts.length !== 4 || parts.some((part) => !Number.isInteger(part) || part < 0 || part > 255)) return false;
+  const [first, second, third] = parts;
+  if (first === 0 || first === 10 || first === 127 || first >= 224) return false;
+  if (first === 169 && second === 254) return false;
+  if (first === 172 && second >= 16 && second <= 31) return false;
+  if (first === 192 && second === 168) return false;
+  return !((first === 192 && second === 0 && third === 2) || (first === 198 && second === 51 && third === 100) || (first === 203 && second === 0 && third === 113));
+}
+
 type RequirementStatus = "available" | "waiting" | "missing";
 type RequirementItem = { id: string; module: string; title: string; detail: string; status: RequirementStatus; action?: View };
 
@@ -341,6 +353,7 @@ function IntelligenceViewLegacy() {
 
 function ReputationEvidencePanel({ provider, result, sourceIp, busy, approve }: { provider: "AbuseIPDB" | "VirusTotal"; result: { ip: string; abuseConfidenceScore: number; totalReports: number; numDistinctUsers: number; isWhitelisted: number; malicious: number; suspicious: number; harmless: number; undetected: number; reputationScore: number | null; countryCode: string | null; asn: number | null; asOwner: string | null; network: string | null; usageType: string | null; isp: string | null; domain: string | null } | undefined; sourceIp: string | null | undefined; busy: boolean; approve: () => void }) {
   const isAbuse = provider === "AbuseIPDB";
+  if (!result && sourceIp && !isExternallyEnrichableIpv4(sourceIp)) return <section className="panel"><div className="panel-header"><div><span>{provider.toUpperCase()} REPUTATION</span><h2>Approved source-IP check</h2></div></div><EmptyData icon={Radar} title="Source IP is not eligible for lookup" copy={`${sourceIp} is a private, reserved, or documentation-only address. It is kept as private evidence and is never sent to ${provider}.`} compact /></section>;
   return <section className="panel"><div className="panel-header"><div><span>{provider.toUpperCase()} REPUTATION</span><h2>Approved source-IP check</h2></div></div>{result ? isAbuse ? <div className="analysis-pending"><SeverityBadge value={result.abuseConfidenceScore >= 60 ? "high" : result.abuseConfidenceScore >= 25 ? "medium" : "low"} /><strong>{result.ip} · {result.abuseConfidenceScore}/100 confidence of abuse</strong><p>{result.totalReports} reports from {result.numDistinctUsers} reporting user{result.numDistinctUsers === 1 ? "" : "s"}. {result.isWhitelisted ? "The provider marks this IP as whitelisted." : "The provider does not mark this IP as whitelisted."}</p><p>{[result.usageType, result.isp, result.domain, result.countryCode].filter(Boolean).join(" · ") || "No additional provider metadata was returned."}</p></div> : <div className="analysis-pending"><SeverityBadge value={result.malicious > 0 ? "high" : result.suspicious > 0 ? "medium" : "low"} /><strong>{result.ip} · {result.malicious} malicious / {result.suspicious} suspicious provider detections</strong><p>{result.harmless} harmless and {result.undetected} undetected results. Community reputation: {result.reputationScore ?? "not recorded"}.</p><p>{[result.asOwner, result.network, result.countryCode, result.asn ? `ASN ${result.asn}` : null].filter(Boolean).join(" · ") || "No additional provider metadata was returned."}</p></div> : <div className="analysis-pending"><strong>{sourceIp ? `Extracted source IP: ${sourceIp}` : "No source IP was extracted from this case."}</strong><p>When approved, only this public IP is sent to {provider}. No email body, attachment, or account details are sent.</p><Button className="outline-cta" disabled={!sourceIp || busy} onClick={approve}><Radar size={15} /> {busy ? `Checking ${provider}…` : `Approve ${provider} check`}</Button></div>}</section>;
 }
 
@@ -422,7 +435,8 @@ function GeolocationCaseFlow() {
   const utils = trpc.useUtils();
   const enrich = trpc.analysis.enrichLocation.useMutation({ onSuccess: () => { utils.analysis.locations.invalidate(); utils.analysis.detail.invalidate(); toast.success("Approximate source location saved to this private case."); }, onError: (error) => toast.error(error.message) });
   const saved = locations.data || [];
-  const sourceIp = detail.data?.artifact?.originatingIp;
+  const extractedSourceIp = detail.data?.artifact?.originatingIp;
+  const sourceIp = isExternallyEnrichableIpv4(extractedSourceIp) ? extractedSourceIp : null;
   const onMapReady = useCallback((map: google.maps.Map) => {
     const maps = window.google?.maps;
     if (!maps || !saved.length) return;
