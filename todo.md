@@ -105,4 +105,4 @@
 - [x] Reject RFC 5737 documentation-only IPv4 ranges before any geolocation or external reputation request is attempted.
 - [x] Align Location Map and Threat Intelligence eligibility messaging with the server guard so documentation-only IPs are blocked before approval controls are shown.
 - [ ] Obtain a separately authorized, correctly formatted `.eml` with a real public source IP and a structural score of at least 60 to validate provider/map happy paths and the high-risk owner-alert timeline; do not synthesize evidence.
-- [ ] Create, validate, and synchronize a polished GitHub README with accurate features, setup, safety boundaries, and real-evidence validation status.
+- [x] Create, validate, and synchronize a polished GitHub README with accurate features, setup, safety boundaries, and real-evidence validation status.
