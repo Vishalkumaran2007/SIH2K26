@@ -101,7 +101,7 @@
 - [x] Inspect the newly authorized SIH26106_HighRisk_Test.eml and record only the validation paths supported by its real extracted evidence.
 - [x] Process the newly authorized email through the protected upload workflow and verify private case/evidence persistence.
 - [x] Browser-verify applicable blocked-IP map/intelligence safeguards and the analyst-approved PhishTank result using the newly authorized case, without fabricating data.
-- [ ] Re-run regression checks, update validation records, and synchronize any verified changes to GitHub.
+- [x] Re-run regression checks, update validation records, and synchronize any verified changes to GitHub.
 - [x] Reject RFC 5737 documentation-only IPv4 ranges before any geolocation or external reputation request is attempted.
 - [x] Align Location Map and Threat Intelligence eligibility messaging with the server guard so documentation-only IPs are blocked before approval controls are shown.
 - [ ] Obtain a separately authorized, correctly formatted `.eml` with a real public source IP and a structural score of at least 60 to validate provider/map happy paths and the high-risk owner-alert timeline; do not synthesize evidence.
