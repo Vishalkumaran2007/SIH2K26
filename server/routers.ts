@@ -4,7 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { invokeLLM } from "./_core/llm";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { TRPCError } from "@trpc/server";
-import { addInvestigationNote, enrichInvestigationGeolocation, enrichInvestigationPhishTank, enrichInvestigationReputation, enrichInvestigationVirusTotal, findSimilarInvestigations, getDashboardSummary, getInvestigation, listAdministrativeUsers, listGeolocations, listIndicators, listInvestigations, listIpReputations, recordInvestigationEvent, saveAnalysis, setAdministrativeUserRole, updateInvestigationStatus } from "./db";
+import { addInvestigationNote, enrichInvestigationGeolocation, enrichInvestigationPhishTank, enrichInvestigationReputation, enrichInvestigationVirusTotal, findSimilarInvestigations, getDashboardSummary, getInvestigation, listAdministrativeUsers, listGeolocations, listIndicators, listInvestigations, listIpReputations, recordInvestigationEvent, rerunInvestigationAiReview, saveAnalysis, setAdministrativeUserRole, updateInvestigationStatus } from "./db";
 import { analyzeEmailContentWithAi, applyAiContentAssessment, isLikelyEml, parseEml } from "./emailAnalysis";
 import { storagePut } from "./storage";
 import { notifyOwner } from "./_core/notification";
@@ -120,6 +120,9 @@ export const appRouter = router({
     }),
     enrichPhishTank: protectedProcedure.input(z.object({ investigationId: z.number().int().positive(), url: z.string().url().max(2048) })).mutation(async ({ ctx, input }) => {
       try { return await enrichInvestigationPhishTank(ctx.user.id, input.investigationId, input.url); } catch (error) { throw new TRPCError({ code: "BAD_REQUEST", message: error instanceof Error ? error.message : "The extracted URL could not be checked." }); }
+    }),
+    reviewAi: protectedProcedure.input(z.object({ investigationId: z.number().int().positive() })).mutation(async ({ ctx, input }) => {
+      try { return await rerunInvestigationAiReview(ctx.user.id, input.investigationId); } catch (error) { throw new TRPCError({ code: "BAD_REQUEST", message: error instanceof Error ? error.message : "The bounded AI review could not be completed." }); }
     }),
     ingestEml: protectedProcedure.input(z.object({ filename: z.string().trim().min(1).max(512), mimeType: z.string().trim().max(128), base64: z.string().min(1).max(5_600_000) })).mutation(async ({ ctx, input }) => {
       if (!input.filename.toLowerCase().endsWith(".eml")) throw new TRPCError({ code: "BAD_REQUEST", message: "Upload an .eml file. .msg parsing is not connected yet." });
