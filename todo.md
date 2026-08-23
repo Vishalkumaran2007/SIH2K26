@@ -97,4 +97,4 @@
 - [x] Process the user-supplied authorized sample2.eml through the protected workflow and verify resulting case evidence without fabricating data.
 - [x] Diagnose and repair the bounded AI assessment fallback when a real authorized case does not persist a structured result.
 - [ ] Browser-verify the visible missing-AI retry control from an owned future case that genuinely lacks an AI assessment, without altering or fabricating evidence.
-- [ ] Synchronize the authorized-case bounded-AI repair, regression test, validation notes, and tracker updates to GitHub after scanning for credentials.
+- [x] Synchronize the authorized-case bounded-AI repair, regression test, validation notes, and tracker updates to GitHub after scanning for credentials.
