@@ -106,3 +106,8 @@
 - [x] Align Location Map and Threat Intelligence eligibility messaging with the server guard so documentation-only IPs are blocked before approval controls are shown.
 - [ ] Obtain a separately authorized, correctly formatted `.eml` with a real public source IP and a structural score of at least 60 to validate provider/map happy paths and the high-risk owner-alert timeline; do not synthesize evidence.
 - [x] Create, validate, and synchronize a polished GitHub README with accurate features, setup, safety boundaries, and real-evidence validation status.
+- [x] Audit active authenticated workspace routes, existing theme behavior, and design constraints for a Material You redesign.
+- [x] Preserve and browser-verify the public landing page while applying the Material You redesign exclusively to authenticated workspace views.
+- [x] Add paired light/dark Material You semantic tokens and redesign workspace navigation, surfaces, controls, and responsive layouts.
+- [x] Validate the redesigned workspace’s responsive presentation, contract coverage, full test suite, TypeScript check, and production build.
+- [ ] Browser-verify the redesigned workspace theme toggle persists after reload and that key navigation, analyzer, case, intelligence, and map entries still work.

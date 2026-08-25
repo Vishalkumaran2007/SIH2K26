@@ -39,3 +39,9 @@ This browser check specifically confirms that RFC 5737 documentation-only addres
 The signed-in dashboard was rechecked after ingestion. It showed two private saved analyses, including **INV-2026-MT57VP69** at `47/100` medium severity and `100%` AI confidence, while the high-risk count remained `0` because the configured alert threshold is `60` or higher. This confirms the dashboard does not label a sub-threshold test case as high risk or claim a high-risk owner alert.
 
 The final regression pass after the eligibility fix completed with **22 passing test files / 27 passing tests** and **3 intentionally skipped opt-in live-provider tests**. TypeScript checking and the production build also completed successfully. The build retains the pre-existing non-blocking runtime asset-resolution and bundle-size warnings.
+
+## Material You workspace redesign — 25 August 2026
+
+The authenticated workspace was restyled with a scoped Material You layer while the public landing route remained unchanged. The signed-in shell now uses rounded tonal surfaces, a violet seed palette, Roboto typography, pill-shaped navigation and actions, paired light/dark semantic tokens, and responsive mobile presentation. Desktop and mobile screenshots confirmed that the workspace adapts at the 800px breakpoint while the landing page keeps its previous Signal Furnace presentation. No email-analysis procedure, evidence record, route, authorization guard, AI boundary, or provider workflow was changed by this visual-only redesign.
+
+Rendered previews confirmed the redesigned Dashboard, Threat Intelligence, Location Map, and Requirements views in both applicable light/dark states. The existing theme persistence contract remains covered by test; a fresh authenticated browser session is still required for a post-redesign manual toggle-and-reload check because the available interactive session redirected to OAuth during validation.
