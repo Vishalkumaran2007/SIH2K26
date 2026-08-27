@@ -113,3 +113,5 @@
 - [ ] Browser-verify the redesigned workspace theme toggle persists after reload and that key navigation, analyzer, case, intelligence, and map entries still work.
 - [x] Reduce case-detail congestion by stacking long evidence/provider panels, widening readable content, and improving long-indicator wrapping without changing evidence logic.
 - [ ] Browser-verify the loosened case-detail layout with a real populated case after signing in; the supplied screenshots were used for analysis and the updated empty-state preview rendered successfully.
+- [x] Implement a looser populated Threat Intelligence provider layout so AbuseIPDB, VirusTotal, and related evidence panels can remain readable instead of compressed side by side.
+- [ ] Browser-verify the populated Threat Intelligence view after sign-in with a real case containing provider panels.
