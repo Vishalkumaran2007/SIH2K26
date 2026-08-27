@@ -111,3 +111,5 @@
 - [x] Add paired light/dark Material You semantic tokens and redesign workspace navigation, surfaces, controls, and responsive layouts.
 - [x] Validate the redesigned workspace’s responsive presentation, contract coverage, full test suite, TypeScript check, and production build.
 - [ ] Browser-verify the redesigned workspace theme toggle persists after reload and that key navigation, analyzer, case, intelligence, and map entries still work.
+- [x] Reduce case-detail congestion by stacking long evidence/provider panels, widening readable content, and improving long-indicator wrapping without changing evidence logic.
+- [ ] Browser-verify the loosened case-detail layout with a real populated case after signing in; the supplied screenshots were used for analysis and the updated empty-state preview rendered successfully.
