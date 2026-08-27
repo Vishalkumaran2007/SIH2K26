@@ -115,3 +115,5 @@
 - [ ] Browser-verify the loosened case-detail layout with a real populated case after signing in; the supplied screenshots were used for analysis and the updated empty-state preview rendered successfully.
 - [x] Implement a looser populated Threat Intelligence provider layout so AbuseIPDB, VirusTotal, and related evidence panels can remain readable instead of compressed side by side.
 - [ ] Browser-verify the populated Threat Intelligence view after sign-in with a real case containing provider panels.
+- [x] Audit the current website against the SIH26106 requirements and report implemented, approval-dependent, and remaining capabilities accurately.
+- [x] Confirm GitHub repository availability and explain the hosting compatibility of GitHub Pages for the full-stack platform.
